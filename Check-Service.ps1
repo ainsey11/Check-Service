@@ -12,8 +12,8 @@
 
 
 # Other settings
-$ServerFilter =
-$servicename =
+$ServerFilter = {OperatingSystem -Like “Windows Server*”}
+$servicename = 
 
 # Mail server settings
 
@@ -24,7 +24,10 @@ $smtpsubject = "Ainsey11 Service WatchGuard"
 $smtppriority = "High"
 $smtpbody = "The $servicename service has failed on $failedserver please investigate"
 
+$servers = Get-ADComputer -Filter $ServerFilter
+    (for each $server in $servers){
 
+   }
 
 
 
