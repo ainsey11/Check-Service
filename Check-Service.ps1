@@ -10,18 +10,22 @@
 
 #Set up my variables
 
-# Mail server settings
-
-$smtpserver 
-$smtpfrom
-$smtpto
-$smtpsubject
-$smtppriority
-$smtpbody
 
 # Other settings
-$ServerFilter
-$servicename
+$ServerFilter =
+$servicename =
+
+# Mail server settings
+
+$smtpserver = "mail.acme.com"
+$smtpfrom = "ainsey11@acme.com"
+$smtpto = "ainsey11@acme.com"
+$smtpsubject = "Ainsey11 Service WatchGuard"
+$smtppriority = "High"
+$smtpbody = "The $servicename service has failed on $failedserver please investigate"
+
+
+
 
 
 <#
@@ -36,4 +40,3 @@ sudo code - this'll be the end goal
            no - mail me
       end
 #>
-
