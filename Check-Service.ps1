@@ -9,7 +9,7 @@
 #> 
 
 #Set up my variables
-
+Import-Module "ActiveDiretory" 
 
 # Other settings
 $ServerFilter = {(Name -Like "THQ*") -And (Enabled -eq "True")}
@@ -19,15 +19,15 @@ $logfile = C:\Scripting\Logs\Check-Service\$date.txt
 
 # Mail server settings
 
-$smtpserver = "mail.acme.com"
-$smtpfrom = "ainsey11@acme.com"
-$smtpto = "ainsey11@acme.com"
+$smtpserver = "mail.timicogroup.local"
+$smtpfrom = "robscripts@timico.co.uk"
+$smtpto = "rob@timico.co.uk"
 $smtpsubject = "Ainsey11 Service WatchGuard"
 $smtppriority = "High"
 $smtpbody = "The $servicename service has failed on $failedserver please investigate"
 
 $servers = Get-ADComputer -Filter $ServerFilter -Properties * 
-    (foreach $server in $servers)
+   Foreach ($server in $servers)
     {
    
    if (Get-Service $servicename)
@@ -53,16 +53,3 @@ $servers = Get-ADComputer -Filter $ServerFilter -Properties *
     }
     }
     }
-
-<#
-sudo code - this'll be the end goal
-    Get list of machines via ad
-      for each, connect
-      check if service is installed
-        if not - mail me
-        if so - cont
-      is service running
-           yes - end
-           no - mail me
-      end
-#>
