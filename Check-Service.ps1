@@ -12,8 +12,10 @@
 
 
 # Other settings
-$ServerFilter = {OperatingSystem -Like “Windows Server*”}
+$ServerFilter = {(Name -Like "THQ*") -And (Enabled -eq "True")}
 $servicename = 
+$date = Get-Date -Format HH-mm-dd-MMM-yyyy
+$logfile = C:\Scripting\Logs\Check-Service\$date.txt
 
 # Mail server settings
 
@@ -24,10 +26,21 @@ $smtpsubject = "Ainsey11 Service WatchGuard"
 $smtppriority = "High"
 $smtpbody = "The $servicename service has failed on $failedserver please investigate"
 
-$servers = Get-ADComputer -Filter $ServerFilter
-    (for each $server in $servers){
-
-   }
+$servers = Get-ADComputer -Filter $ServerFilter -Properties * 
+    (foreach $server in $servers)
+    {
+   
+   if (Get-Service "SolarWindsAgent64")
+   {
+    Add-Content $logfile "$server has $servicename installed"
+    }
+    else 
+    {
+    Add-Content $logfile "$server has not got $servicename installed! Please install"
+    Send-MailMessage -SmtpServer $smtpserver -From $smtpfrom -To $smtpto -Subject $smtpsubject -Priority $smtppriority -Body "$servicename does not exist on $server. Please Install to clear error"
+    }
+    
+    }
 
 
 
