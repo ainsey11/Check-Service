@@ -9,7 +9,7 @@
 #> 
 
 #Set up my variables
-Import-Module "ActiveDiretory" 
+Import-Module "ActiveDirectory" 
 
 # Other settings
 $ServerFilter = {(Name -Like "THQ*") -And (Enabled -eq "True")}
@@ -19,9 +19,9 @@ $logfile = C:\Scripting\Logs\Check-Service\$date.txt
 
 # Mail server settings
 
-$smtpserver = "mail.timicogroup.local"
-$smtpfrom = "robscripts@timico.co.uk"
-$smtpto = "rob@timico.co.uk"
+$smtpserver = "#"
+$smtpfrom = "#"
+$smtpto = "#"
 $smtpsubject = "Ainsey11 Service WatchGuard"
 $smtppriority = "High"
 $smtpbody = "The $servicename service has failed on $failedserver please investigate"
