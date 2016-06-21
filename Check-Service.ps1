@@ -18,14 +18,22 @@ $ADFilter = {(Operatingsystem -Like "Windows Server*") -And (Enabled -eq "True")
 $ADServers = Get-ADComputer -Filter $ADFilter -Properties *
 $date = $date = Get-Date -Format HH-mm-dd-MMM-yyyy
 $logfile = "C:\Scripting\Logs\Check-Service\$date"
-$MailServer = ""
-$MailSender = ""
-$MailRecipient = ""
-$MailPriority = ""
-$MailSubject = ""
-$Mailbody = "" 
+$MailServer = "#"
+$MailSender = "#"
+$MailRecipient = "#"
+$MailPriority = "High"
+$MailSubject = "Solarwinds Service Failure"
+$MailBody = "Solarwinds Service has stopped on one of the active servers on the timicogroup.local domain. <br>
+                <br><br> 
+                To find ones that have the service stopped, use a custom powershell loop I have premade for this case. Please see the attachment to this INC. <br>
+                Rename to .PS1 then comment out from line 47 and below using # . Uncomment line 46 by removing the # then run on a machine with Domain Administrator Access<br>
+                THIS IS IS NOT TO BE IGNORED!!. <br>
+                <br>
+                <br>
+                If there are any issues with this notification, or there are bugs / errors please notify Internal IT.
+               "
 
-
+$MailAttatchment = "C:\Scripting\Check-Service\Check-Service.txt"
 
 Function LogWrite
 {
@@ -35,11 +43,11 @@ Function LogWrite
 }
 
 $Status = Invoke-Command -ComputerName $ADServers.name -ScriptBlock {Get-Service -Name "Solarwinds*"} -ErrorVariable $outputerror -ErrorAction SilentlyContinue
+#$Status
 
 $Status  | ForEach-Object {
 if ($_.Status -ne "Running"){
-Write-Host "The Server" $_.PSComputerName "has an issue. Status is currently"$_.Status
-Send-MailMessage -SmtpServer $MailServer -From $MailSender -To $MailRecipient -Priority $MailPriority -Subject $MailSubject -Body $MailBody
+#Write-Host "The Server" $_.PSComputerName "has an issue. Status is currently"$_.Status
+Send-MailMessage -SmtpServer $MailServer -From $MailSender -To $MailRecipient -Priority $MailPriority -Subject $MailSubject -Body $Mailbody -Attachments $MailAttatchment -BodyAsHtml
 }
-
 }
