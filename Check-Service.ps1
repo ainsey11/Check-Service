@@ -26,7 +26,13 @@ $MailSubject = "Solarwinds Service Failure"
 $MailBody = "Solarwinds Service has stopped on one of the active servers on the timicogroup.local domain. <br>
                 <br><br> 
                 To find ones that have the service stopped, use a custom powershell loop I have premade for this case. Please see the attachment to this INC. <br>
-                Rename to .PS1 then comment out from line 47 and below using # . Uncomment line 46 by removing the # then run on a machine with Domain Administrator Access<br>
+                Rename to .PS1 then comment out from line 47 and below using # . Uncomment line 46 by removing the #<br>
+                Copy the file to the desktop of a domain server, IE man01 <br>
+                open powershell <br>
+                type cd C:\users\<username>\Desktop  <br>
+                run .\Check-Service.ps1 <br>
+                Servers with the stopped status are the ones that require attention <br>
+                RDP to those servers and start the Solarwinds Agent Service.<br><br>
                 THIS IS IS NOT TO BE IGNORED!!. <br>
                 <br>
                 <br>
