@@ -5,7 +5,7 @@
     Checks to see if service is running, if not - restart it, mail me. If service non existant, mail me. Uses an AD query to find computers 
   .NOTES 
   Author: Ainsey11 <https://ainsey11.com>                                      
-  Date : 18/05/2016                           
+  Date : 23/06/2016                           
 #> 
 
 
