@@ -23,7 +23,7 @@ $MailSender = "#"
 $MailRecipient = "#"
 $MailPriority = "High"
 $MailSubject = "Solarwinds Service Failure"
-$MailBody = "Solarwinds Service has stopped on one of the active servers on the timicogroup.local domain. <br>
+$MailBody = "Solarwinds Service has stopped on one of the active servers on the domain. <br>
                 <br><br> 
                 To find ones that have the service stopped, use a custom powershell loop I have premade for this case. Please see the attachment to this INC. <br>
                 Rename to .PS1 then comment out from line 47 and below using # . Uncomment line 46 by removing the #<br>
